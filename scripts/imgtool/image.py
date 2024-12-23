@@ -269,7 +269,7 @@ class Image:
                                                   self.save_enctlv,
                                                   self.enctlv_len)
                 trailer_addr = (self.base_addr + self.slot_size) - trailer_size
-                if self.confirm and not self.overwrite_only:
+                if self.confirm:
                     magic_align_size = align_up(len(self.boot_magic),
                                                 self.max_align)
                     image_ok_idx = -(magic_align_size + self.max_align)
@@ -630,7 +630,7 @@ class Image:
         pbytes = bytearray([self.erased_val] * padding)
         pbytes += bytearray([self.erased_val] * (tsize - len(self.boot_magic)))
         pbytes += self.boot_magic
-        if self.confirm and not self.overwrite_only:
+        if self.confirm:
             magic_size = 16
             magic_align_size = align_up(magic_size, self.max_align)
             image_ok_idx = -(magic_align_size + self.max_align)
